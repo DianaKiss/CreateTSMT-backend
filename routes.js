@@ -18,6 +18,18 @@ const connection = mysql.createConnection({
 
 app.get('/api/excercises', (req, res) => {
 
+  let sql = `SELECT * FROM table`;
+  conn.query(sql, (error, rows) => {
+    if (error) {
+      console.log(error);
+      res.status(500).send();
+      return;
+    }
+    res.json({
+      posts: rows,
+    });
+  });
+
 });
 
 // app.post()
