@@ -18,7 +18,7 @@ const connection = mysql.createConnection({
 
 app.get('/api/excercises', (req, res) => {
 
-  let sql = `SELECT * FROM table`;
+  let sql = `SELECT * FROM tsmt_data.excercises;`;
   conn.query(sql, (error, rows) => {
     if (error) {
       console.log(error);
@@ -32,6 +32,9 @@ app.get('/api/excercises', (req, res) => {
 
 });
 
-// app.post()
+// app.post( (), => {
+//   let sql = `INSERT INTO `tsmt_data`.`excercises` (`Pic_URL`, `Description`, `Category`, `Effect`) VALUES ('${}', '${}', '${}', '${}');`;
+//   
+// });
 
 module.exports = app;
