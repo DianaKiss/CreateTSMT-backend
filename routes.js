@@ -9,19 +9,18 @@ const path = require('path');
 
 app.use('/assets', express.static('assets'));
 
-app.use(express.json())
+app.use(express.json());
 
-const connection = mysql.createConnection({
-
-
+const conn = mysql.createConnection({
+  
 });
 
 app.get('/api/excercises', (req, res) => {
 
   let sql = `SELECT * FROM tsmt_data.excercises;`;
-  conn.query(sql, (error, rows) => {
-    if (error) {
-      console.log(error);
+  conn.query(sql, (err, rows) => {
+    if (err) {
+      console.log(err);
       res.status(500).send();
       return;
     }
@@ -32,9 +31,24 @@ app.get('/api/excercises', (req, res) => {
 
 });
 
-// app.post( (), => {
-//   let sql = `INSERT INTO `tsmt_data`.`excercises` (`Pic_URL`, `Description`, `Category`, `Effect`) VALUES ('${}', '${}', '${}', '${}');`;
-//   
+app.post('/api/excercises', (req, res) => {
+  let {picUrl, description, category, effect} = req.body;
+  let sql = `INSERT INTO tsmt_data.excercises (Pic_URL, Description, Category, Effect) VALUES ('${picUrl}', '${description}', '${category}', '${effect}');`;
+  conn.query(sql, (err, rows) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send();
+      return;
+    }
+    res.json({
+      message: 'OK',
+    });
+  });
+});
+
+// app.delete('api/excercises', (req, res) => {
+//   let sql = `DELETE FROM tsmt_data.excercises WHERE id_excercises='2';`;
+
 // });
 
 module.exports = app;
