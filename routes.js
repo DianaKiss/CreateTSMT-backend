@@ -18,9 +18,9 @@ const conn = mysql.createConnection({
   database: process.env.DB_DATABASE,
 });
 
-app.get('/api/excercises', (req, res) => {
+app.get('/api/exercises', (req, res) => {
 
-  let sql = `SELECT * FROM tsmt_data.excercises;`;
+  let sql = `SELECT * FROM tsmt_data.exercises;`;
   conn.query(sql, (err, rows) => {
     if (err) {
       console.log(err);
@@ -34,9 +34,9 @@ app.get('/api/excercises', (req, res) => {
 
 });
 
-app.post('/api/excercises', (req, res) => {
+app.post('/api/exercises', (req, res) => {
   let {picUrl, description, category, effect} = req.body;
-  let sql = `INSERT INTO tsmt_data.excercises (Pic_URL, Description, Category, Effect) VALUES ('${picUrl}', '${description}', '${category}', '${effect}');`;
+  let sql = `INSERT INTO tsmt_data.exercises (Pic_URL, Description, Category, Effect) VALUES ('${picUrl}', '${description}', '${category}', '${effect}');`;
   conn.query(sql, (err, rows) => {
     if (err) {
       console.log(err);
@@ -49,8 +49,8 @@ app.post('/api/excercises', (req, res) => {
   });
 });
 
-// app.delete('api/excercises', (req, res) => {
-//   let sql = `DELETE FROM tsmt_data.excercises WHERE id_excercises='2';`;
+// app.delete('api/exercises', (req, res) => {
+//   let sql = `DELETE FROM tsmt_data.exercises WHERE id_exercises='2';`;
 
 // });
 
